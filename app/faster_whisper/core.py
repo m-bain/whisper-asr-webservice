@@ -25,6 +25,7 @@ def transcribe(
         language: Union[str, None],
         initial_prompt: Union[str, None],
         word_timestamps: Union[bool, None],
+        vad_filter: Union[bool, None],
         output,
 ):
     options_dict = {"task": task}
@@ -34,6 +35,9 @@ def transcribe(
         options_dict["initial_prompt"] = initial_prompt
     if word_timestamps:
         options_dict["word_timestamps"] = True
+    if vad_filter:
+        options_dict["vad_filter"] = True
+    
     with model_lock:
         segments = []
         text = ""
